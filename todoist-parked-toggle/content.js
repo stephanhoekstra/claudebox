@@ -26,8 +26,9 @@
         const siblings = Array.from(parent.children);
         if (siblings.length < 2) continue;
 
-        // A board column should have a non-trivial subtree (its task cards).
-        if (node.querySelectorAll('*').length > 10) {
+        // A board column is rendered as a <section> with a non-trivial
+        // subtree (its task cards).
+        if (node.tagName === 'SECTION' && node.querySelectorAll('*').length > 10) {
           candidate = node;
         }
       }
