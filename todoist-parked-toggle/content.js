@@ -1,17 +1,22 @@
 (function () {
   const BUTTON_ID = 'todoist-parked-toggle-btn';
 
-  // The "Parked" board column, as a fixed DOM path from #content. Todoist's
-  // board view uses generated/hashed class names, so this positional
-  // selector is used instead. If Todoist changes the board layout, this
-  // selector will need to be updated to match the new structure.
-  const PARKED_COLUMN_SELECTOR =
-    '#content > div > div > div > div > div > div > div:nth-child(4)';
+  // The "Parked" board column and its divider, as fixed DOM paths from
+  // #content. Todoist's board view uses generated/hashed class names, so
+  // these positional selectors are used instead. If Todoist changes the
+  // board layout, these selectors will need to be updated to match the new
+  // structure.
+  const PARKED_COLUMN_SELECTORS = [
+    '#content > div > div > div > div > div > div > div:nth-child(3)',
+    '#content > div > div > div > div > div > div > div:nth-child(4)',
+  ];
 
   let collapsed = false;
 
-  function findParkedColumn() {
-    return document.querySelector(PARKED_COLUMN_SELECTOR);
+  function findParkedColumns() {
+    return PARKED_COLUMN_SELECTORS.map((selector) => document.querySelector(selector)).filter(
+      Boolean
+    );
   }
 
   function isInboxView() {
@@ -48,13 +53,15 @@
       return;
     }
 
-    const column = findParkedColumn();
-    if (!column) {
+    const columns = findParkedColumns();
+    if (columns.length === 0) {
       removeButton();
       return;
     }
 
-    column.style.display = collapsed ? 'none' : '';
+    columns.forEach((column) => {
+      column.style.display = collapsed ? 'none' : '';
+    });
     ensureButton();
   }
 

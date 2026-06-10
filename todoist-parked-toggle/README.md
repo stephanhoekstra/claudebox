@@ -16,8 +16,8 @@ exactly where they are, only the column's visibility is toggled.
 
 ## Notes
 
-The "Parked" column is located via a fixed positional CSS selector
-(`PARKED_COLUMN_SELECTOR` in `content.js`), since this column must be the
-4th column in the board view. If Todoist changes its board layout, or the
-"Parked" column moves to a different position, this selector will need to be
-updated.
+The "Parked" column (and the divider before it) is located via fixed
+positional CSS selectors (`PARKED_COLUMN_SELECTORS` in `content.js`), since
+these must be the 3rd and 4th columns in the board view. If Todoist changes
+its board layout, or the "Parked" column moves to a different position,
+these selectors will need to be updated.
