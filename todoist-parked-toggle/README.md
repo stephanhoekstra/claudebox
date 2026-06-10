@@ -16,8 +16,8 @@ exactly where they are, only the column's visibility is toggled.
 
 ## Notes
 
-Todoist's web app uses generated CSS class names that change between
-deployments, so this extension locates the "Parked" column by its visible
-text label rather than a fixed selector. If Todoist significantly changes its
-board layout, the column-detection logic in `content.js`
-(`findParkedColumn`) may need adjusting.
+The "Parked" column is located via a fixed positional CSS selector
+(`PARKED_COLUMN_SELECTOR` in `content.js`), since this column must be the
+4th column in the board view. If Todoist changes its board layout, or the
+"Parked" column moves to a different position, this selector will need to be
+updated.
