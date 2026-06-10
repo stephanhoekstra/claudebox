@@ -1,21 +1,24 @@
 (function () {
   const BUTTON_ID = 'todoist-parked-toggle-btn';
-  const COLUMN_LABEL = 'Parked';
+  const COLUMN_LABEL = 'parked';
 
   let collapsed = false;
 
-  // Find the board column whose header text is "Parked".
+  // Find the board column whose header text is "Parked" (any case).
   // Todoist's board view uses generated/hashed class names, so instead of
   // relying on those we walk up from a text node that says "Parked" until
-  // we find an ancestor that is one of several sibling "columns" and that
-  // contains a sizeable subtree (the column's task list).
+  // we find the outermost ancestor that is still one of several sibling
+  // "columns" and that contains a sizeable subtree (the column's task list).
+  // Climbing as far as possible (rather than stopping at the first match)
+  // ensures we toggle the whole column, not just its header.
   function findParkedColumn() {
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     let textNode;
     while ((textNode = walker.nextNode())) {
-      if (textNode.nodeValue.trim() !== COLUMN_LABEL) continue;
+      if (textNode.nodeValue.trim().toLowerCase() !== COLUMN_LABEL.toLowerCase()) continue;
 
       let node = textNode.parentElement;
+      let candidate = null;
       for (let depth = 0; node && depth < 10; depth++, node = node.parentElement) {
         const parent = node.parentElement;
         if (!parent) continue;
@@ -25,9 +28,10 @@
 
         // A board column should have a non-trivial subtree (its task cards).
         if (node.querySelectorAll('*').length > 10) {
-          return node;
+          candidate = node;
         }
       }
+      if (candidate) return candidate;
     }
     return null;
   }
