@@ -21,10 +21,10 @@
       let candidate = null;
       for (let depth = 0; node && depth < 10; depth++, node = node.parentElement) {
         const parent = node.parentElement;
-        if (!parent) break;
+        if (!parent) continue;
 
         const siblings = Array.from(parent.children);
-        if (siblings.length < 2) break;
+        if (siblings.length < 2) continue;
 
         // A board column should have a non-trivial subtree (its task cards).
         if (node.querySelectorAll('*').length > 10) {
