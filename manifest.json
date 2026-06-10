@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Todoist Parked Column Toggle",
+  "version": "1.0.0",
+  "description": "Adds a button to the Todoist Inbox board view to collapse/uncollapse the 'Parked' column.",
+  "content_scripts": [
+    {
+      "matches": ["https://app.todoist.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

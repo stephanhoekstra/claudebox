@@ -1,0 +1,33 @@
+#todoist-parked-toggle-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999999;
+  padding: 12px 20px;
+  background-color: #1a73e8;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+#todoist-parked-toggle-btn:hover {
+  background-color: #1558b8;
+}
+
+#todoist-parked-toggle-btn:active {
+  transform: scale(0.97);
+}
+
+#todoist-parked-toggle-btn.collapsed {
+  background-color: #5f6368;
+}
+
+#todoist-parked-toggle-btn.collapsed:hover {
+  background-color: #494c50;
+}
