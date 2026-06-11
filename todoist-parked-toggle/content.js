@@ -11,7 +11,7 @@
     '#content > div > div > div > div > div > div > div:nth-child(4)',
   ];
 
-  let collapsed = false;
+  let collapsed = true;
 
   function findParkedColumns() {
     return PARKED_COLUMN_SELECTORS.map((selector) => document.querySelector(selector)).filter(

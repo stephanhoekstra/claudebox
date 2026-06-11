@@ -1,10 +1,11 @@
 # Todoist Parked Column Toggle
 
 A small Chrome extension for app.todoist.com. On the Inbox page in **Board**
-view, it adds a blue "Hide Parked" / "Show Parked" button in the bottom-right
-corner. Clicking it visually collapses (hides) or restores the "Parked"
-column. The tasks in that column are not modified or moved — they remain
-exactly where they are, only the column's visibility is toggled.
+view, it adds a blue "Show Parked" / "Hide Parked" button in the bottom-right
+corner. The "Parked" column is hidden by default; clicking the button
+visually restores (or hides again) the column. The tasks in that column are
+not modified or moved — they remain exactly where they are, only the
+column's visibility is toggled.
 
 ## Installing (unpacked)
 
