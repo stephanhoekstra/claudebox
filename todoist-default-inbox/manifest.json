@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Todoist Default Inbox",
+  "version": "1.0.0",
+  "description": "Redirects the Todoist 'Today' view to the Inbox.",
+  "content_scripts": [
+    {
+      "matches": ["https://app.todoist.com/app/today*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
