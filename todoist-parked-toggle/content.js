@@ -10,8 +10,8 @@
   // and shows a one-time alert with the offending selector so it's easy to
   // find and fix in DevTools.
   const PARKED_COLUMN_SELECTORS = [
-    '#content > div > div > div > div > div > div > div:nth-child(3)',
-    '#content > div > div > div > div > div > div > div:nth-child(4)',
+    '#content > div > div > div > div > div > div > div > div > div > div:nth-child(3) > div > div.zoRS8Kk.TQOhANR > section',
+    '#content > div > div > div > div > div > div > div > div > div > div:nth-child(4) > div > div.zoRS8Kk.TQOhANR > section',
   ];
 
   let collapsed = true;

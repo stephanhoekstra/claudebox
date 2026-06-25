@@ -19,9 +19,9 @@ column's visibility is toggled.
 
 The "Parked" column (and the divider before it) is located via fixed
 positional CSS selectors (`PARKED_COLUMN_SELECTORS` in `content.js`), since
-these must be the 3rd and 4th columns in the board view. If Todoist changes
-its board layout, or the "Parked" column moves to a different position,
-these selectors will need to be updated.
+these target the `<section>` of the 3rd and 4th columns in the board view.
+If Todoist changes its board layout, or the "Parked" column moves to a
+different position, these selectors will need to be updated.
 
 ## Diagnosing breakage
 
