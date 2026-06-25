@@ -22,3 +22,15 @@ positional CSS selectors (`PARKED_COLUMN_SELECTORS` in `content.js`), since
 these must be the 3rd and 4th columns in the board view. If Todoist changes
 its board layout, or the "Parked" column moves to a different position,
 these selectors will need to be updated.
+
+## Diagnosing breakage
+
+If Todoist's board layout changes, the selectors above will stop matching.
+When that happens, this extension:
+
+- logs a `console.warn` with the offending selector, and
+- shows a one-time `alert()` naming the selector that no longer matches.
+
+Open DevTools on the Inbox board view, inspect the actual "Parked" column,
+and update `PARKED_COLUMN_SELECTORS` in `content.js` to match the new DOM
+structure.

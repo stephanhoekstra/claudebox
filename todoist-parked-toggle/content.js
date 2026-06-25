@@ -1,22 +1,43 @@
 (function () {
   const BUTTON_ID = 'todoist-parked-toggle-btn';
+  const LOG_PREFIX = '[Todoist Parked Toggle]';
 
   // The "Parked" board column and its divider, as fixed DOM paths from
   // #content. Todoist's board view uses generated/hashed class names, so
   // these positional selectors are used instead. If Todoist changes the
   // board layout, these selectors will need to be updated to match the new
-  // structure.
+  // structure. When a selector stops matching, this script logs a warning
+  // and shows a one-time alert with the offending selector so it's easy to
+  // find and fix in DevTools.
   const PARKED_COLUMN_SELECTORS = [
     '#content > div > div > div > div > div > div > div:nth-child(3)',
     '#content > div > div > div > div > div > div > div:nth-child(4)',
   ];
 
   let collapsed = true;
+  const missingSelectors = new Set();
 
   function findParkedColumns() {
-    return PARKED_COLUMN_SELECTORS.map((selector) => document.querySelector(selector)).filter(
-      Boolean
-    );
+    const found = [];
+    for (const selector of PARKED_COLUMN_SELECTORS) {
+      const el = document.querySelector(selector);
+      if (el) {
+        found.push(el);
+        missingSelectors.delete(selector);
+        continue;
+      }
+
+      console.warn(`${LOG_PREFIX} selector matched no element:`, selector);
+      if (!missingSelectors.has(selector)) {
+        missingSelectors.add(selector);
+        alert(
+          `${LOG_PREFIX} Could not find the Parked column.\n\nSelector: ${selector}\n\n` +
+            'Todoist\'s board layout may have changed. Open DevTools and update ' +
+            'PARKED_COLUMN_SELECTORS in content.js.'
+        );
+      }
+    }
+    return found;
   }
 
   function isInboxView() {
@@ -49,12 +70,14 @@
 
   function tick() {
     if (!isInboxView()) {
+      missingSelectors.clear();
       removeButton();
       return;
     }
 
     const columns = findParkedColumns();
     if (columns.length === 0) {
+      console.warn(`${LOG_PREFIX} no Parked columns found on this page.`);
       removeButton();
       return;
     }
